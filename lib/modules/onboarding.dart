@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/modules/shop_login.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class onBoardingScreen extends StatelessWidget {
-  onBoardingScreen({super.key});
+class OnBoardingScreen extends StatelessWidget {
+  OnBoardingScreen({super.key});
 
   var pageController = PageController();
   var pageCount = 3;
@@ -51,6 +51,9 @@ class onBoardingScreen extends StatelessWidget {
                   controller: pageController,
                   count: 3,
                   effect: JumpingDotEffect(
+                    offset: 10,
+                    verticalOffset: 10,
+                    //jumpScale: 5,
                     activeDotColor: Colors.orangeAccent,
                     dotColor: Colors.grey,
                     spacing: 8.0,
@@ -64,8 +67,8 @@ class onBoardingScreen extends StatelessWidget {
                 Spacer(),
                 FloatingActionButton(
                   onPressed: () {
-                    print(pageController.page);
-                    if ((pageController.page) == pageCount-1) {
+                    print(pageController.page?.floor());
+                    if ((pageController.page)?.floor() == pageCount-1) {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
