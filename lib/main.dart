@@ -1,7 +1,12 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/cubit/bloc_observer.dart';
+import 'package:shop_app/modules/shop_login.dart';
+import 'package:shop_app/network/remote/dio_helper.dart';
 
-import 'modules/onboarding.dart';
 void main() {
+  DioHelper.init();
+  Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
 
@@ -20,7 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
 
       ),
-      home: OnBoardingScreen(),
+      home: ShopLoginScreen(),
     );
   }
 }
