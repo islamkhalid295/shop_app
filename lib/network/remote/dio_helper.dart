@@ -7,15 +7,27 @@ import 'package:shop_app/network/remote/end_points.dart';
 class DioHelper {
   static Dio? dio;
 
-  static init (){
-    dio = Dio(BaseOptions(baseUrl: 'https://student.valuxapps.com/api/', receiveDataWhenStatusError: true));
+  static init() {
+    dio = Dio(BaseOptions(
+        baseUrl: 'https://student.valuxapps.com/api/',
+        receiveDataWhenStatusError: true));
   }
 
-  static Future<Response> getData (url,quary)async{
-    return await dio!.get(url ,queryParameters: quary);
+  static Future<Response>  getData(url, {quary,lang='ar',token}) async {
+    dio?.options.headers = {
+      'lang' : lang,
+      'Content-Type' : 'application/json',
+      'Authorization' : token??'',
+    };
+    return await dio!.get(url, queryParameters: quary);
   }
 
-  static Future<Response> postData (url,data)async{
+  static Future<Response> postData(url, data,{token,lang='ar'}) async {
+    dio?.options.headers = {
+      'Authorization' : token,
+      'lang' : lang??'ar',
+      'Content-Type' : 'application/json',
+    };
     return await dio!.post(url, data: data);
   }
 }

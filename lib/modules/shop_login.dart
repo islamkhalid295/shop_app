@@ -54,6 +54,7 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                             return null;
                         },
                         controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(color: Colors.orange.shade300),
@@ -78,6 +79,15 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                         },
                         controller: passwordController,
                         obscureText: !showPassword,
+                        onFieldSubmitted: (value) {
+                          if (formKey.currentState!.validate()) {
+                            LoginCubit.get(context).login(
+                                emailController.text,
+                                passwordController.text,
+                                context,
+                            );
+                          }
+                        },
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                               icon: Icon(eyeIcon),
@@ -109,8 +119,11 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                           condition: state is! LodingState,
                           builder: (context) => MaterialButton(
                             onPressed: () {
-                              formKey.currentState?.validate();
-                              LoginCubit.get(context).login(emailController.text, passwordController.text);
+                              if (formKey.currentState!.validate()) {
+                                LoginCubit.get(context).login(
+                                    emailController.text,
+                                    passwordController.text,context);
+                              }
                             },
                             color: Colors.orange.shade300,
                             child: Text('Login',

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/modules/shop_login.dart';
+import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({super.key});
@@ -74,6 +77,10 @@ class OnBoardingScreen extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => ShopLoginScreen(),
                           ));
+                      CacheHelper.saveData('onBoarding', true).then((value) {
+                        print('value : ${value.toString()}');
+                        print(CacheHelper.getData("onBoarding"));
+                      });
                     } else {
                       pageController.nextPage(
                           duration: Duration(seconds: 1),
