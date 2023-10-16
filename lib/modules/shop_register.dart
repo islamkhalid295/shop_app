@@ -37,7 +37,7 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Register",
                         style: TextStyle(
                           fontSize: 50,
@@ -52,64 +52,67 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                           color: Colors.grey[300],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       TextFormField(
                         keyboardType: TextInputType.name,
                         validator: (value) {
-                          if (value!.isEmpty)
+                          if (value!.isEmpty) {
                             return 'name can\'t be empty';
-                          else
+                          } else {
                             return null;
+                          }
                         },
                         controller: nameController,
                         decoration: InputDecoration(
                           labelText: 'name',
                           labelStyle: TextStyle(color: Colors.orange.shade300),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.person,
                           ),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
+                          border: const OutlineInputBorder(),
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.orangeAccent),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       TextFormField(
                         validator: (value) {
-                          if (value!.isEmpty)
+                          if (value!.isEmpty) {
                             return 'Email can\'t be empty';
-                          else
+                          } else {
                             return null;
+                          }
                         },
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(color: Colors.orange.shade300),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.email_outlined,
                           ),
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.orange.shade300),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       TextFormField(
                         validator: (value) {
-                          if (value!.isEmpty)
+                          if (value!.isEmpty) {
                             return 'Password can\'t be empty';
-                          else
+                          } else {
                             return null;
+                          }
                         },
                         controller: passwordController,
                         obscureText: !showPassword,
@@ -135,40 +138,41 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                               }),
                           labelText: 'Password',
                           labelStyle: TextStyle(color: Colors.orange.shade300),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.password_rounded,
                           ),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
+                          border: const OutlineInputBorder(),
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.orangeAccent),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       TextFormField(
                         keyboardType: TextInputType.phone,
                         validator: (value) {
-                          if (value!.isEmpty)
+                          if (value!.isEmpty) {
                             return 'phone can\'t be empty';
-                          else
+                          } else {
                             return null;
+                          }
                         },
                         controller: phoneController,
                         decoration: InputDecoration(
                           labelText: 'Phone',
                           labelStyle: TextStyle(color: Colors.orange.shade300),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.phone,
                           ),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
+                          border: const OutlineInputBorder(),
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.orangeAccent),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Container(
@@ -187,7 +191,7 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                               }
                             },
                             color: Colors.orange.shade300,
-                            child: Text('REGISTER',
+                            child: const Text('REGISTER',
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20)),
                           ),

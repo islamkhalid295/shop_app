@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/componant/componant.dart';
 import 'package:shop_app/cubit/app_cubit.dart';
-import 'package:shop_app/cubit/login_cubit.dart';
 import 'package:shop_app/cubit/states.dart';
 import 'package:shop_app/network/remote/dio_helper.dart';
 import 'package:shop_app/network/remote/end_points.dart';
@@ -36,79 +35,82 @@ class SettingsScreen extends StatelessWidget {
               key: formKey,
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.name,
                     validator: (value) {
-                      if (value!.isEmpty)
+                      if (value!.isEmpty) {
                         return 'name can\'t be empty';
-                      else
+                      } else {
                         return null;
+                      }
                     },
                     controller: nameController,
                     decoration: InputDecoration(
                       labelText: 'name',
                       labelStyle: TextStyle(color: Colors.orange.shade300),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.person,
                       ),
-                      border: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(
+                      border: const OutlineInputBorder(),
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.orangeAccent),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   TextFormField(
                     validator: (value) {
-                      if (value!.isEmpty)
+                      if (value!.isEmpty) {
                         return 'Email can\'t be empty';
-                      else
+                      } else {
                         return null;
+                      }
                     },
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       labelText: 'Email',
                       labelStyle: TextStyle(color: Colors.orange.shade300),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.email_outlined,
                       ),
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.orange.shade300),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.phone,
                     validator: (value) {
-                      if (value!.isEmpty)
+                      if (value!.isEmpty) {
                         return 'phone can\'t be empty';
-                      else
+                      } else {
                         return null;
+                      }
                     },
                     controller: phoneController,
                     decoration: InputDecoration(
                       labelText: 'Phone',
                       labelStyle: TextStyle(color: Colors.orange.shade300),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.phone,
                       ),
-                      border: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(
+                      border: const OutlineInputBorder(),
+                      focusedBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.orangeAccent),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(
@@ -135,7 +137,7 @@ class SettingsScreen extends StatelessWidget {
                           }
                         },
                         color: Colors.orange.shade300,
-                        child: Text('UPDATE',
+                        child: const Text('UPDATE',
                             style:
                             TextStyle(color: Colors.white, fontSize: 20)),
                       ),
@@ -145,7 +147,7 @@ class SettingsScreen extends StatelessWidget {
                           )),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(
@@ -155,7 +157,7 @@ class SettingsScreen extends StatelessWidget {
                         AppCubit.get(context).logOut(context);
                       },
                       color: Colors.orange.shade300,
-                      child: Text('LOGOUT',
+                      child: const Text('LOGOUT',
                           style:
                           TextStyle(color: Colors.white, fontSize: 20)),
                     )

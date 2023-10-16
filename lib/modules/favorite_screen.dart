@@ -19,9 +19,9 @@ class FavoriteScreen extends StatelessWidget {
           FavoriteModel? model = AppCubit.favoriteModel;
           return ConditionalBuilderRec(
             condition: model != null,
-            fallback: (context) => Center(child: CircularProgressIndicator()),
+            fallback: (context) => const Center(child: CircularProgressIndicator()),
             builder: (context) => ListView.separated(
-              itemBuilder: (context, index) => buildFavoriteItem(model,index),
+              itemBuilder: (context, index) => buildListItem(model.data.data[index],context),
               separatorBuilder:(context, index) => myDivider(),
               itemCount: model!.data.data.length,
             ),

@@ -38,46 +38,48 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Login",
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       TextFormField(
                         validator: (value) {
-                          if (value!.isEmpty)
+                          if (value!.isEmpty) {
                             return 'Email can\'t be empty';
-                          else
+                          } else {
                             return null;
+                          }
                         },
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle: TextStyle(color: Colors.orange.shade300),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.email_outlined,
                           ),
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.orange.shade300),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       TextFormField(
                         validator: (value) {
-                          if (value!.isEmpty)
+                          if (value!.isEmpty) {
                             return 'Password can\'t be empty';
-                          else
+                          } else {
                             return null;
+                          }
                         },
                         controller: passwordController,
                         obscureText: !showPassword,
@@ -103,16 +105,16 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                               }),
                           labelText: 'Password',
                           labelStyle: TextStyle(color: Colors.orange.shade300),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.password_rounded,
                           ),
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
+                          border: const OutlineInputBorder(),
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.orangeAccent),
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       Container(
@@ -128,20 +130,20 @@ class _ShopLoginScreenState extends State<ShopLoginScreen> {
                               }
                             },
                             color: Colors.orange.shade300,
-                            child: Text('Login',
+                            child: const Text('Login',
                                 style: TextStyle(color: Colors.white, fontSize: 20)),
                           ),
                           fallback: (context) => Center(child: CircularProgressIndicator(color: Colors.orange.shade300,)),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
                         children: [
-                          Text('Don\'t have account?'),
+                          const Text('Don\'t have account?'),
                           TextButton(onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder:(context) =>  ShopRegisterScreen()));
+                            Navigator.push(context, MaterialPageRoute(builder:(context) =>  const ShopRegisterScreen()));
                           }, child: Text('Register',style: TextStyle(color: defaultColor[200]),),)
                         ],
                       ),

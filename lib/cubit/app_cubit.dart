@@ -1,5 +1,3 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/componant/componant.dart';
@@ -8,6 +6,7 @@ import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/favorites_model.dart';
 import 'package:shop_app/models/login_model.dart';
 import 'package:shop_app/models/product_model.dart';
+import 'package:shop_app/models/search_model.dart';
 import 'package:shop_app/modules/categories_screen.dart';
 import 'package:shop_app/modules/favorite_screen.dart';
 import 'package:shop_app/modules/products_screen.dart';
@@ -24,10 +23,10 @@ class AppCubit extends Cubit<AppStates>{
   int currentIndex = 0;
   static AppCubit get(context) => BlocProvider.of(context);
   List<Widget> screens = [
-    ProductsScreen(),
-    CategoriesScreen(),
-    FavoriteScreen(),
-    SettingsScreen(),
+    const ProductsScreen(),
+    const CategoriesScreen(),
+    const FavoriteScreen(),
+    const SettingsScreen(),
   ];
 
   void changeBottom (int index)
@@ -44,7 +43,6 @@ class AppCubit extends Cubit<AppStates>{
       homeModel?.data.products.forEach((element) {
         inFavorite.addAll({element.id: element.in_favorites,});
       });
-      print(homeModel?.data.products[0].name);
       emit(HomeDataSucssesState());
     }).catchError((error){
       emit(HomeDataErorrState(error));
@@ -58,7 +56,6 @@ class AppCubit extends Cubit<AppStates>{
       categoriesModel= CategoriesModel.fromJson(value.data);
       emit(CategoriesDataSucssesState());
     }).catchError((error){
-      print(error);
       emit(CategoriesDataErorrState(error));
     });
   }
@@ -66,7 +63,7 @@ class AppCubit extends Cubit<AppStates>{
   void changeFavorite(int id){
     inFavorite[id] = !inFavorite[id]!;
     emit(FavoriteChangeSucssesState());
-    var model;
+    FavoriteChangeModel model;
     DioHelper.postData(
       FAVORITES,
       {"product_id" : id},
@@ -80,7 +77,7 @@ class AppCubit extends Cubit<AppStates>{
       emit(FavoriteChangeSucssesState());
     }).catchError((error){
       inFavorite[id] = !inFavorite[id]!;
-      toast(model.message, Colors.red);
+      toast(error.toString(), Colors.red);
       FavoriteChangeErorrState(error);
     });
   }
@@ -92,13 +89,12 @@ class AppCubit extends Cubit<AppStates>{
       favoriteModel= FavoriteModel.fromJson(value.data);
       emit(FavoriteDataSucssesState());
     }).catchError((error){
-      print(error);
       emit(FavoriteDataErorrState(error));
     });
   }
   void logOut (context){
     CacheHelper.remove('token').then((value) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ShopLoginScreen(),));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ShopLoginScreen(),));
     });
   }
   LoginModel? loginModel;
@@ -109,4 +105,15 @@ class AppCubit extends Cubit<AppStates>{
       emit(GetProfileDataSucssesState());
     });
   }
+  SearchModel? searchModel;
+  void search(String text){
+    emit(SearchLodingState());
+    DioHelper.postData(SEARCH,{
+      "text": text,
+    },token: token).then((value) {
+      searchModel = SearchModel.fromJson(value.data);
+      emit(SearchDataSucssesState());
+    });
+  }
+
 }

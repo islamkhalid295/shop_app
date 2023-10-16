@@ -1,5 +1,4 @@
 import 'package:conditional_builder_rec/conditional_builder_rec.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/componant/componant.dart';
@@ -17,7 +16,7 @@ class CategoriesScreen extends StatelessWidget {
         var model = AppCubit.categoriesModel;
         return ConditionalBuilderRec(
           condition: model != null,
-          fallback: (context) => Center(child: CircularProgressIndicator()),
+          fallback: (context) => const Center(child: CircularProgressIndicator()),
           builder: (context) => ListView.separated(
             separatorBuilder:(context, index) => myDivider(),
             itemCount: model!.data.data.length,
@@ -25,15 +24,15 @@ class CategoriesScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: [
-                  Image(image: NetworkImage(model!.data.data[index].image),
+                  Image(image: NetworkImage(model.data.data[index].image),
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
                   ),
-                  SizedBox(width: 10,),
-                  Text(model!.data.data[index].name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                  Spacer(),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios)),
+                  const SizedBox(width: 10,),
+                  Text(model.data.data[index].name,style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  const Spacer(),
+                  IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_forward_ios)),
                 ],
               ),
             ),

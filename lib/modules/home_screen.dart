@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubit/app_cubit.dart';
 import 'package:shop_app/cubit/states.dart';
-import 'package:shop_app/modules/categories_screen.dart';
-import 'package:shop_app/modules/favorite_screen.dart';
-import 'package:shop_app/modules/products_screen.dart';
-import 'package:shop_app/modules/settings_screen.dart';
+import 'package:shop_app/modules/search.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -21,14 +18,20 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) {
         AppCubit cubit = AppCubit.get(context);
         return Scaffold(
-          appBar: AppBar(title: Text("salla")),
+          appBar: AppBar(title: const Text("salla"),
+            actions: [
+              IconButton(onPressed: (){
+                Navigator.push(context,MaterialPageRoute(builder: (context) => const Search(),));
+              }, icon: const Icon(Icons.search))
+            ],
+          ),
           body: cubit.screens[cubit.currentIndex],
           bottomNavigationBar: BottomNavigationBar(
             onTap: (value) {
               cubit.changeBottom(value);
             },
             currentIndex: cubit.currentIndex,
-            items: [
+            items: const [
               BottomNavigationBarItem(
                   icon: Icon(Icons.home),
                   label: "Home"

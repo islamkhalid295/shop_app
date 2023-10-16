@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-import 'package:shop_app/models/product_model.dart';
 
 class FavoriteModel{
   late bool status;

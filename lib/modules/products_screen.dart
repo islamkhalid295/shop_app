@@ -6,8 +6,6 @@ import 'package:shop_app/componant/componant.dart';
 import 'package:shop_app/cubit/app_cubit.dart';
 import 'package:shop_app/cubit/states.dart';
 import 'package:shop_app/models/product_model.dart';
-import 'package:shop_app/network/remote/dio_helper.dart';
-import 'package:shop_app/network/remote/end_points.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -42,7 +40,7 @@ class ProductsScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Categories',
                             style: TextStyle(fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -55,22 +53,22 @@ class ProductsScreen extends StatelessWidget {
                               itemBuilder: (context, index) => buildCategoriesItem(AppCubit.categoriesModel!,index),
                               scrollDirection: Axis.horizontal,
                               itemCount: AppCubit.categoriesModel!.data.data.length,
-                              separatorBuilder: (context, index) => SizedBox(width: 10,),
+                              separatorBuilder: (context, index) => const SizedBox(width: 10,),
 
                             ),
                           ),
-                          SizedBox(height: 10,),
-                          Text(
+                          const SizedBox(height: 10,),
+                          const Text(
                             'New Products',
                             style: TextStyle(fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           GridView.count(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             crossAxisCount: 2,
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             // mainAxisSpacing: ,
                             crossAxisSpacing: 3,
                             mainAxisSpacing: 3,
@@ -84,6 +82,7 @@ class ProductsScreen extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       Stack(
+                                        alignment: AlignmentDirectional.bottomEnd,
                                         children: [
                                           Image(
                                               fit: BoxFit.cover,
@@ -94,49 +93,48 @@ class ProductsScreen extends StatelessWidget {
                                             Container(
                                               width: 80,
                                               color: Colors.red,
-                                              child: Center(child: Text('DISCOUNT')),
+                                              child: const Center(child: Text('DISCOUNT')),
                                             )
                                         ],
-                                        alignment: AlignmentDirectional.bottomEnd,
                                       ),
                                       Text(
                                         model.data.products[index].name,
                                         maxLines: 2,
                                         style:
-                                        TextStyle(overflow: TextOverflow.ellipsis),
+                                        const TextStyle(overflow: TextOverflow.ellipsis),
                                       ),
                                       Row(
                                         children: [
                                           Text(
                                             '${model.data.products[index].price}',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.orange,
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10,
                                           ),
                                           if (model.data.products[index].discount != 0)
                                             Text(
                                               '${model.data.products[index].old_price}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   decoration:
                                                   TextDecoration.lineThrough,
                                                   color: Colors.grey,
                                                   fontSize: 12),
                                             ),
-                                          Spacer(),
+                                          const Spacer(),
                                           CircleAvatar(
+                                            radius: 15,
+                                            backgroundColor: cubit.inFavorite[model.data.products[index].id]! ? defaultColor[200] : Colors.grey[200],
                                             child: IconButton(
-                                              icon: Icon(Icons.favorite_border),
+                                              icon: const Icon(Icons.favorite_border),
                                               onPressed: (){
                                                 cubit.changeFavorite(model.data.products[index].id);
                                               },
                                               iconSize: 15,
                                             ),
-                                            radius: 15,
-                                            backgroundColor: cubit.inFavorite[model.data.products[index].id]! ? defaultColor[200] : Colors.grey[200],
                                           ),
                                         ],
                                       ),
@@ -154,7 +152,7 @@ class ProductsScreen extends StatelessWidget {
               ),
             );
           },
-          fallback: (context) => Center(child: CircularProgressIndicator()),
+          fallback: (context) => const Center(child: CircularProgressIndicator()),
         );
       },
     );

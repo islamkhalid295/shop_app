@@ -60,3 +60,13 @@ class GetProfileDataErorrState extends AppStates {
 
   GetProfileDataErorrState(this.error);
 }
+
+class SearchLodingState extends AppStates {}
+
+class SearchDataSucssesState extends AppStates {}
+
+class SearchDataErorrState extends AppStates {
+  var error;
+
+  SearchDataErorrState(this.error);
+}

@@ -1,4 +1,3 @@
-import 'package:shop_app/models/login_model.dart';
 
 class LoginModel {
   late bool status;

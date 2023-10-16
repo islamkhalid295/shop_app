@@ -1,9 +1,9 @@
-import 'dart:ui';
+
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shop_app/cubit/app_cubit.dart';
 import 'package:shop_app/models/categories_model.dart';
-import 'package:shop_app/models/login_model.dart';
 
 void toast(String messange, Color color) {
   Fluttertoast.showToast(
@@ -32,7 +32,7 @@ Widget buildCategoriesItem(CategoriesModel model, int index) {
         child: Text(
           model.data.data[index].name,
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
     ],
@@ -47,28 +47,28 @@ Widget myDivider() => Container(
 
 MaterialColor defaultColor = Colors.orange;
 
-Widget buildFavoriteItem(model, int index) => Padding(
+Widget buildListItem(model, context, {bool isSearch = false}) => Padding(
       padding: const EdgeInsets.all(12),
       child: Row(
         children: [
           Stack(
+            alignment: AlignmentDirectional.bottomEnd,
             children: [
               Image(
-                fit: BoxFit.cover,
-                image: NetworkImage(model.data.data[index].image),
+                image: NetworkImage(model.image),
                 height: 100,
                 width: 100,
               ),
-              if (model.data.data[index].discount != 0)
+              if(!isSearch)
+                if (model.discount != 0)
                 Container(
                   width: 80,
                   color: Colors.red,
-                  child: Center(child: Text('DISCOUNT')),
+                  child: const Center(child: Text('DISCOUNT')),
                 )
             ],
-            alignment: AlignmentDirectional.bottomEnd,
           ),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           Expanded(
@@ -77,31 +77,44 @@ Widget buildFavoriteItem(model, int index) => Padding(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  model.data.data[index].name,
+                  model.name,
                   maxLines: 2,
-                  style: TextStyle(overflow: TextOverflow.ellipsis),
+                  style: const TextStyle(overflow: TextOverflow.ellipsis),
                 ),
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
                 Row(
                   children: [
                     Text(
-                      '${model.data.data[index].price}',
-                      style: TextStyle(
+                      '${model.price}',
+                      style: const TextStyle(
                           color: Colors.orange,
                           fontSize: 18,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
-                    if (model.data.data[index].discount != 0)
+                    if(!isSearch)
+                    if (model.discount != 0)
                       Text(
-                        '${model.data.data[index].old_price}',
-                        style: TextStyle(
+                        '${model.old_price}',
+                        style: const TextStyle(
                             decoration: TextDecoration.lineThrough,
                             color: Colors.grey,
                             fontSize: 15),
                       ),
+                    const Spacer(),
+                    CircleAvatar(
+                      radius: 15,
+                      backgroundColor: AppCubit.get(context).inFavorite[model.id]! ? defaultColor[200] : Colors.grey[200],
+                      child: IconButton(
+                        icon: const Icon(Icons.favorite_border),
+                        onPressed: (){
+                          AppCubit.get(context).changeFavorite(model.id);
+                        },
+                        iconSize: 15,
+                      ),
+                    ),
                   ],
                 )
               ],

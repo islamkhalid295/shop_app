@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/modules/shop_login.dart';
 import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 
 class OnBoardingScreen extends StatelessWidget {
@@ -27,13 +26,13 @@ class OnBoardingScreen extends StatelessWidget {
                   children: [
                     Expanded(
                         child: Image.asset('lib/images/shopping-cart_.jpg')),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Text("OnBoarding Titel ${index+1}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold)),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Text(
@@ -45,7 +44,7 @@ class OnBoardingScreen extends StatelessWidget {
                 controller: pageController,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Row(
@@ -53,7 +52,7 @@ class OnBoardingScreen extends StatelessWidget {
                 SmoothPageIndicator(
                   controller: pageController,
                   count: 3,
-                  effect: JumpingDotEffect(
+                  effect: const JumpingDotEffect(
                     offset: 10,
                     verticalOffset: 10,
                     //jumpScale: 5,
@@ -67,27 +66,24 @@ class OnBoardingScreen extends StatelessWidget {
                     strokeWidth: 1.5,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 FloatingActionButton(
                   onPressed: () {
-                    print(pageController.page?.floor());
                     if ((pageController.page)?.floor() == pageCount-1) {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ShopLoginScreen(),
+                            builder: (context) => const ShopLoginScreen(),
                           ));
                       CacheHelper.saveData('onBoarding', true).then((value) {
-                        print('value : ${value.toString()}');
-                        print(CacheHelper.getData("onBoarding"));
                       });
                     } else {
                       pageController.nextPage(
-                          duration: Duration(seconds: 1),
+                          duration: const Duration(seconds: 1),
                           curve: Curves.fastLinearToSlowEaseIn);
                     }
                   },
-                  child: Icon(Icons.arrow_forward_ios_rounded),
+                  child: const Icon(Icons.arrow_forward_ios_rounded),
                 ),
               ],
             ),
