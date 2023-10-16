@@ -10,7 +10,16 @@ class LoginErorrState extends AppStates {
   LoginErorrState(this.error);
 }
 
+class RegisterSucssesState extends AppStates {}
+
+class RegisterErorrState extends AppStates {
+  var error;
+
+  RegisterErorrState(this.error);
+}
+
 class LodingState extends AppStates {}
+class LodingGetProfileState extends AppStates {}
 
 class BottomNavBarState extends AppStates {}
 
@@ -43,4 +52,11 @@ class FavoriteDataErorrState extends AppStates {
   var error;
 
   FavoriteDataErorrState(this.error);
+}
+class GetProfileDataSucssesState extends AppStates {}
+
+class GetProfileDataErorrState extends AppStates {
+  var error;
+
+  GetProfileDataErorrState(this.error);
 }

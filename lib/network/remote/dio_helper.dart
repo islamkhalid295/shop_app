@@ -30,4 +30,14 @@ class DioHelper {
     };
     return await dio!.post(url, data: data);
   }
+
+  static Future<Response> putData(url, data,{token,lang='ar'}) async {
+    dio?.options.headers = {
+      'Authorization' : token,
+      'lang' : lang??'ar',
+      'Content-Type' : 'application/json',
+    };
+    return await dio!.put(url, data: data);
+  }
+
 }

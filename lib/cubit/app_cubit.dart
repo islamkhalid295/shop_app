@@ -6,11 +6,14 @@ import 'package:shop_app/componant/componant.dart';
 import 'package:shop_app/cubit/states.dart';
 import 'package:shop_app/models/categories_model.dart';
 import 'package:shop_app/models/favorites_model.dart';
+import 'package:shop_app/models/login_model.dart';
 import 'package:shop_app/models/product_model.dart';
 import 'package:shop_app/modules/categories_screen.dart';
 import 'package:shop_app/modules/favorite_screen.dart';
 import 'package:shop_app/modules/products_screen.dart';
 import 'package:shop_app/modules/settings_screen.dart';
+import 'package:shop_app/modules/shop_login.dart';
+import 'package:shop_app/network/local/cache_helper.dart';
 import 'package:shop_app/network/remote/dio_helper.dart';
 import 'package:shop_app/network/remote/end_points.dart';
 
@@ -91,6 +94,19 @@ class AppCubit extends Cubit<AppStates>{
     }).catchError((error){
       print(error);
       emit(FavoriteDataErorrState(error));
+    });
+  }
+  void logOut (context){
+    CacheHelper.remove('token').then((value) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ShopLoginScreen(),));
+    });
+  }
+  LoginModel? loginModel;
+  void getProfile(){
+    emit(LodingGetProfileState());
+    DioHelper.getData(PROFILE,token: token).then((value) {
+      loginModel = LoginModel.fromJson(value.data);
+      emit(GetProfileDataSucssesState());
     });
   }
 }

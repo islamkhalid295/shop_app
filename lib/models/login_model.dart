@@ -2,7 +2,7 @@ import 'package:shop_app/models/login_model.dart';
 
 class LoginModel {
   late bool status;
-  late String message;
+  late dynamic message;
   UserData? data;
 
   LoginModel.fromJson(Map<String, dynamic> json){

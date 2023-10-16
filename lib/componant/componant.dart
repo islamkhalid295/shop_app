@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_app/models/categories_model.dart';
+import 'package:shop_app/models/login_model.dart';
 
 void toast(String messange, Color color) {
   Fluttertoast.showToast(
@@ -16,7 +17,6 @@ void toast(String messange, Color color) {
 }
 
 String? token;
-
 Widget buildCategoriesItem(CategoriesModel model, int index) {
   return Stack(
     alignment: Alignment.bottomCenter,
