@@ -20,15 +20,13 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
   var passwordController = TextEditingController();
   var phoneController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LoginCubit(InitState()),
-      child: BlocConsumer<LoginCubit,AppStates>(
+      child: BlocConsumer<LoginCubit, AppStates>(
         listener: (context, state) {},
         builder: (context, state) {
-
           return Scaffold(
             appBar: AppBar(backgroundColor: (Colors.orange.shade300)),
             body: Padding(
@@ -67,7 +65,6 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                         },
                         controller: nameController,
                         decoration: InputDecoration(
-
                           labelText: 'name',
                           labelStyle: TextStyle(color: Colors.orange.shade300),
                           icon: Icon(
@@ -99,7 +96,8 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                           ),
                           border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.orange.shade300),
+                            borderSide:
+                                BorderSide(color: Colors.orange.shade300),
                           ),
                         ),
                       ),
@@ -118,9 +116,9 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                         onFieldSubmitted: (value) {
                           if (formKey.currentState!.validate()) {
                             LoginCubit.get(context).login(
-                                emailController.text,
-                                passwordController.text,
-                                context,
+                              emailController.text,
+                              passwordController.text,
+                              context,
                             );
                           }
                         },
@@ -181,19 +179,22 @@ class _ShopRegisterScreenState extends State<ShopRegisterScreen> {
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
                                 LoginCubit.get(context).register(
-                                  nameController.text,
+                                    nameController.text,
                                     emailController.text,
                                     passwordController.text,
                                     phoneController.text,
-                                    context
-                                );
+                                    context);
                               }
                             },
                             color: Colors.orange.shade300,
                             child: Text('REGISTER',
-                                style: TextStyle(color: Colors.white, fontSize: 20)),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20)),
                           ),
-                          fallback: (context) => Center(child: CircularProgressIndicator(color: Colors.orange.shade300,)),
+                          fallback: (context) => Center(
+                              child: CircularProgressIndicator(
+                            color: Colors.orange.shade300,
+                          )),
                         ),
                       ),
                     ],
